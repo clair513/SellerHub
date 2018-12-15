@@ -73,7 +73,7 @@ def support():
     return render_template("main/support.html", form=form)
 
 
-# User Registration/Signup View:
+# User Registration or Signup View:
 @app.route("/register", methods=["GET","POST"])
 def register():
     form = RegistrationForm()

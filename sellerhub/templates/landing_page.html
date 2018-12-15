@@ -1,0 +1,35 @@
+{% extends "base/home_base.html" %}
+{% block content %}
+
+
+  <div class="landing-page-image">
+    <img src="./static/front/shoes.jpg" width=100% height=325px  alt="Oops...Image link is currently unavailable!">
+  </div>
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong> Important: </strong> {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+
+      <h2 class="display-4" style="color: #2a264f" style="font-family:verdana"><b>Welcome to Sunindu Data!</b></h2>
+      <p class="lead">Flirting with <i>Qualitative</i> or <i>Quantitative</i> data is an art as it ponderously impacts our research outcome. This process requires very keen attention to every detail, encompassing knowledge from various domains like <i>Applied Statistics, Data Wrangling, Visualizations</i> and further capabilities garnered by applying <i>predictive algorithms</i> on top of it.</p>
+      <hr class="my-4">
+      <h4 class="display-5" style="color: #2a264f" style="font-family:verdana"><b>Work under progress!!!</b></h4>
+    </div>
+  </div>
+
+{% endblock %}

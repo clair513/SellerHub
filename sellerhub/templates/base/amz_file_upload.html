@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title style="font-family:verdana">SellerHub</title>
+  <link rel="shortcut icon" href="../static/logos/sun_small.jpg" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+  <script>feather.replace()</script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <style>
+    .JumbotronFormImg {background-image: url("../static/background/penguin.jpg"); background-size: cover !important;}
+    .JumbotronFormImg1 {background-image: url("../static/background/black_water.jpg"); background-size: cover !important;}
+    .CardBodyImg {background-image: url("../static/background/penguin.jpg"); background-size: cover !important;}
+    .CardBodyImg1 {background-image: url("../static/background/riverbed.jpg"); background-size: cover !important;}
+  </style>
+  <style type="text/css"> body{ background: url("../static/front/churchuri.jpg") !important; background-size: cover !important; background-repeat: no-repeat !important; background-position: center !important; height: 100% !important;}</style>
+  <style type="text/css"> html{ height: 100% !important;}</style>
+  <style>
+    .icon-bar {position: fixed; top: 50%; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%);}
+    .icon-bar a {display: block; text-align: center; padding: 10px; transition: all 0.3s ease; color: white; font-size: 15px;}
+    .icon-bar a:hover {background-color: #000;}
+    .facebook {background: #3B5998; color: white;}
+    .twitter {background: #55ACEE; color: white;}
+    .linkedin {background: #007bb5; color: white;}
+    .youtube {background: #bb0000; color: white;}
+    .content {margin-left: 75px; font-size: 30px;}
+  </style>
+  <link href="../static/css/pricing.css" rel="stylesheet">
+  <link href="../static/css/dashboard.css" rel="stylesheet">
+  <link href="../static/css/page_loading.css" rel="stylesheet">
+  <script src="../static/js/holder.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../static/js/jquery-slim.min.js"><\/script>')</script>
+  <script>Holder.addTheme("thumb", {bg: "#55595c", fg: "#eceeef", text: "Thumbnail"});</script>
+  {{ moment.include_jquery() }}
+  {{ moment.include_moment() }}
+  <style type="text/css">
+    /* Chart.js */
+    @-webkit-keyframes chartjs-render-animation {
+      from {opacity: 0.99;}
+      to {opacity: 1;}
+    }
+    @keyframes chartjs-render-animation {
+      from {opacity: 0.99;}
+      to {opacity: 1;}
+    }
+    .chartjs-render-monitor {-webkit-animation: chartjs-render-animation 0.001s; animation: chartjs-render-animation 0.001s;}
+  </style>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+  <style type="text/css"> body{ background: url("../static/background/pablo.jpg") !important; background-size: cover !important; background-repeat: no-repeat !important; background-position: center !important; height: 100% !important;}</style>
+  <style type="text/css"> html{ height: 100% !important;}</style>
+  <style>
+    .nav-pills .pill-1 .nav-link:not(.active) {background-color: rgba(250, 0, 0, 0.5);}
+    .nav-pills .pill-2 .nav-link:not(.active) {background-color: #df9f9f;}
+    .nav-pills .pill-3 .nav-link:not(.active) {background-color: #ffff4d;}
+  </style>
+  <script>
+    $(function () {
+      $('#myTab li:last-child a').tab('show')
+    })
+  </script>
+  <script type="text/javascript">// <![CDATA[
+        function preloader(){
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("content").style.display = "block";
+        }//preloader
+        window.onload = preloader;
+// ]]></script>
+
+</head>
+
+
+<!-- Top (Horizontal) Navigation Bar Content -->
+<body custom-copy>
+
+  <div id="loading"></div>
+
+  <div id="content">
+
+    <nav class="navbar sticky-top navbar-expand-xl navbar-dark" style="height: auto; background-color: #7c4831;">
+
+
+      <a class="navbar-brand" href="{{url_for("landing_page")}}">
+        <h2 style="height: auto; color: #fce819;"><i class="fa fa-lightbulb-o"></i> $ellerHub </h2>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="color: #83e27c;"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for("pnp")}}" style="color: #ffffff; font-family:verdana;"><b> Features & Pricing</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for("blog")}}" style="color: #ffffff; font-family:verdana;"><b> Blog</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for("support")}}" style="color: #ffffff; font-family:verdana;"><b> Contact Us</b></a>
+          </li>
+          <li class="nav-item">
+            {% if current_user.is_authenticated and current_user.confirmed and current_user.paid==False %}
+            <a class="nav-link" href="{{ url_for("amz_user_payments", username=current_user.username) }}" style="color: #ffffff; font-family:verdana;"><b> My Account</b></a>
+            {% elif current_user.is_authenticated and current_user.confirmed and current_user.paid %}
+            <a class="nav-link" href="{{ url_for("amz_user_overview", username=current_user.username) }}" style="color: #ffffff; font-family:verdana;"><b>My Account</b></a>
+            {% else %}
+            <a class="nav-link" href="{{ url_for("login") }}" style="color: #ffffff; font-family:verdana;"><b>My Account</b></a>
+            {% endif %}
+          </li>
+        </ul>
+
+      </div>
+
+      <div>
+        {% if current_user.is_authenticated and current_user.confirmed %}
+        <a href="{{ url_for("logout") }}" class="w3-button w3-circle w3-red w3-right w3-hover-sepia w3-xlarge" title="Logout"><i class="fa fa-power-off"></i></a>
+        {% endif %}
+      </div>
+
+    </nav>
+
+
+    <!-- Top container -->
+    <div class="w3-bar w3-large" style="z-index:4; background-color:#ffcce6;">
+      <button class="w3-bar-item w3-button w3-hide-large w3-hover-none" onclick="w3_open();" style="color: #514e0d;"><i class="material-icons" style="color: #514e0d;">menu</i></button>
+      {% if current_user.account_status=="New" %}
+      <span class="w3-bar-item w3-right" style="color: #514e0d;"><span class="badge badge-info">Account : {{ user.account_status }}</span></span>
+      {% elif current_user.account_status=="Active" %}
+      <span class="w3-bar-item w3-right" style="color: #514e0d;"><span class="badge badge-success">Account : {{ user.account_status }}</span></span>
+      {% else %}
+      <span class="w3-bar-item w3-right" style="color: #514e0d;"><span class="badge badge-danger">Account : {{ user.account_status }}</span></span>
+      {% endif %}
+    </div>
+
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-collapse w3-animate-zoom" style="z-index:3; width:300px; background-color:#ffcce6;" id="mySidebar"><br>
+      <div class="w3-container w3-row">
+        <div class="w3-col s4">
+          <img src="{{ user.avatar(128) }}" class="w3-circle w3-margin-right" style="width:46px">
+        </div>
+        <div class="w3-col s8 w3-bar">
+
+          <a href="#" class="w3-bar-item w3-button w3-display-topright w3-hide-large w3-tiny" onclick="w3_close()" title="Close Menu" style="color: #514e0d;"><i class="material-icons" style="color: #514e0d;">close</i></a>
+          <span style="color: #514e0d;">Welcome <strong>{{ current_user.username }}</strong>!</span><br>
+
+          <a href="#" class="w3-bar-item w3-button" title="Messages" style="color: #514e0d;"><i class="fa fa-envelope"></i></a>
+
+          <a href="#" class="w3-bar-item w3-button" title="Notifications" style="color: #514e0d;"><i class="fa fa-bell"></i></a>
+
+          <a href="{{ url_for("amz_user_incident_report", username=current_user.username) }}" class="w3-bar-item w3-button" title="Support" style="color: #514e0d;"><i class="fa fa-medkit"></i></a>
+
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="w3-bar-block">
+        {% if current_user.account_status == "Active" %}
+        <a href="{{ url_for("amz_upload_manual", username=current_user.username) }}" class="w3-bar-item w3-button w3-padding" style="color: #514e0d;"><i class="fa fa-cloud-upload fa-fw" style="color: #514e0d;"></i> File Upload</a>
+        <a href="{{ url_for("amz_user_overview", username=current_user.username) }}" class="w3-bar-item w3-button w3-padding" style="color: #514e0d;"><i class="fa fa-home fa-fw" style="color: #514e0d;"></i> Overview</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding" style="color: #514e0d;"><i class="fa fa-shopping-bag fa-fw" style="color: #514e0d;"></i> Orders</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding" style="color: #514e0d;"><i class="fa fa-shopping-cart fa-fw" style="color: #514e0d;"></i> Products</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding" style="color: #514e0d;"><i class="fa fa-users fa-fw" style="color: #514e0d;"></i> Returns</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding" style="color: #514e0d;"><i class="fa fa-globe fa-fw w3-spin" style="color: #514e0d;"></i> Geography</a>
+        <a href="{{ url_for("amz_user_profile", username=current_user.username) }}" class="w3-bar-item w3-button w3-padding" style="color: #514e0d;"><i class="fa fa-user-circle fa-fw" style="color: #514e0d;"></i> Profile</a>
+        {% endif %}
+
+        <a href="{{ url_for("amz_user_payments", username=current_user.username) }}" class="w3-bar-item w3-button w3-padding" style="color: #514e0d;"><i class="fa fa-bank fa-fw" style="color: #514e0d;"></i> Payments</a>
+
+        {% if current_user.account_status == "Active" %}
+        <a href="#" class="w3-bar-item w3-button w3-padding" style="color: #514e0d;"><i class="fa fa-cog fa-fw w3-spin" style="color: #514e0d;"></i> Settings</a><br><br>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span style="color: #514e0d;">Saved reports</span>
+          <a class="d-flex align-items-center text-muted" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+          </a>
+        </h6>
+
+        <ul class="nav flex-column mb-2" style="color: #514e0d;">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              Current month
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              Last quarter
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              Annual Sales
+            </a>
+          </li>
+        </ul>
+
+        {% endif %}
+
+      </div>
+    </nav>
+
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="Close sidebar" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+
+    <!-- File Upload Header Display -->
+    <div class="w3-main" style="margin-left:310px; margin-top:43px;">
+
+      <!-- Flashing prompt/messages -->
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul class=flashes>
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong> {{ message }} </strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+
+      <!-- Header -->
+      <header class="w3-container" style="padding-top:15px; text-align:center;">
+        <h2 style="font-family: Raleway; color: #514e0d;"><b><i class="fa fa-cloud-upload fa-fw"></i> Data File Upload</b></h2>
+      </header>
+      <hr>
+
+      <!-- AMZ File Upload internal Navbar -->
+      <div class="container">
+
+        <nav class="nav nav-pills nav-justified">
+          <a class="nav-item nav-link" href="{{ url_for("amz_upload_manual", username=current_user.username) }}" style="background-color:#4dc247;"><strong><i class="fa fa-upload"></i> Manual Upload</strong></a>
+
+          <a class="nav-item nav-link" href="#"  style="background-color:#ffcce6;"><strong style="color:#4885ed;">G</strong><strong style="color:#db3236;">o</strong><strong style="color:#f4c20d;">o</strong><strong style="color:#4885ed;">g</strong><strong style="color:#3cba54;">l</strong><strong style="color:#db3236;">e</strong><strong> Drive Upload</strong></a>
+
+          <a class="nav-item nav-link" href="#" style="background-color:#ff9900;"><strong style="color:#000000;"><i class="fa fa-amazon"></i> Amazon MWS Login</strong></a>
+        </nav><br>
+
+      </div>
+
+    {% block content %}
+
+
+    {% endblock %}
+
+    <!-- End page content -->
+    </div>
+
+  </div>
+
+  <script>
+    // Get the Sidebar
+    var mySidebar = document.getElementById("mySidebar");
+
+    // Get the DIV with overlay effect
+    var overlayBg = document.getElementById("myOverlay");
+
+    // Toggle between showing and hiding the sidebar, and add overlay effect
+    function w3_open() {
+      if (mySidebar.style.display === "block") {mySidebar.style.display = "none"; overlayBg.style.display = "none";}
+      else {mySidebar.style.display = "block"; overlayBg.style.display = "block";}
+    }
+
+    // Close the sidebar with the close button
+    function w3_close() {mySidebar.style.display = "none"; overlayBg.style.display = "none";}
+  </script>
+
+  <script>
+    $('.close-icon').on('click',function() {
+      $(this).closest('.card').fadeOut();
+    })
+  </script>
+
+
+</body>
+</html>

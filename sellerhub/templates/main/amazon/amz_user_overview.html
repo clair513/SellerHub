@@ -1,0 +1,25 @@
+{% extends "base/amz_base.html" %}
+{% block content %}
+<style type="text/css"> body{ background: url("../static/background/riverbed.jpg") !important; background-size: cover !important; background-repeat: no-repeat !important; background-position: center !important; height: 100% !important;}</style>
+<style type="text/css"> html{ height: 100% !important;}</style>
+<style>
+  html {line-height: 25px; font-family: Raleway;}
+  table {display: block; border-collapse: collapse; overflow-x: scroll;}
+  thead {background-color: #7c4831; font-family: Verdana; color: #fce819;}
+  tbody {height: 300px; display: block;}
+  td {max-height: 20px; min-width: 100px; max-width: 100px; text-overflow: ellipsis; overflow-x: hidden; border: dashed; padding: 8px 16px;}
+  th {max-height: 25px; min-width: 100px;  max-width: 100px; text-overflow: ellipsis; overflow-x: hidden; overflow-y: auto; border: dashed; position: sticky; top: 0; padding: 8px 16px; background-color: #7c4831;}
+</style>
+
+
+  <div class="w3-main" style="margin-left:300px; margin-top:43px;">
+    <header class="w3-container" style="padding-top:15px; text-align:center;">
+      <h2 style="font-family: Raleway; color: #514e0d;"><b><i class="fa fa-bank"></i> Orders  Data</b></h2>
+    </header>
+    <hr>
+    <div class="jumbotron-fluid" style="margin-left:5px; margin-right:5px;">
+      {{ data.head(10).to_html(table_id="orders_table", classes="table table-striped table-hover table-bordered table-dark table-responsive table-sm header-fixed", index=false, na_rep="") | safe }}
+    </div>
+  </div>
+
+{% endblock %}

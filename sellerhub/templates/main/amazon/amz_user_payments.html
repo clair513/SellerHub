@@ -1,0 +1,175 @@
+{% extends "base/amz_base.html" %}
+{% block content %}
+<style>
+  .razorpay-payment-button {
+    background-color: #47bc4c; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    align-self: center;
+    width: auto;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border: 1px solid grey;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    font-family: Verdana;
+    font-weight: bold;
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+</style>
+<style type="text/css"> body{ background: url("../static/background/riverbed.jpg") !important; background-size: cover !important; background-repeat: no-repeat !important; background-position: center !important; height: 100% !important;}</style>
+<style type="text/css"> html{ height: 100% !important;}</style>
+
+
+<!-- !PAGE CONTENT! -->
+
+<!-- Support Ticket Table Display -->
+<div class="w3-main" style="margin-left:300px; margin-top:43px;">
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class=flashes>
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong> {{ message }} </strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:15px; text-align:center;">
+    <h2 style="font-family: Raleway; color: #514e0d;"><b><i class="fa fa-bank"></i> Transaction Details</b></h2>
+  </header>
+  <hr>
+
+  <!-- User Support Ticket Table Details -->
+  <div class="w3-container">
+
+    <table class="w3-table w3-bordered w3-striped w3-border test w3-hoverable w3-centered w3-hover">
+      <tbody>
+        <tr class="w3-green">
+          <th>Date</th>
+          <th>Transaction ID</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Reference Item</th>
+        </tr>
+      </tbody>
+      <tbody style="font-family: Helvetica; color: #514e0d; padding-right:15px;">
+        {% for row in transactions %}
+        <tr>
+          <td>{{ moment(row["trans_created_at"]).format("LLL") }}</td>
+          <td>{{ row["razor_id"] }}</td>
+          <td>{{ row["type"] }}</td>
+          <td>{{ row["amount"] }}</td>
+          <td>{{ row["trans_item"] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <script>
+        var tables = document.getElementsByTagName("table");
+        var table = tables[tables.length - 1];
+        var rows = table.rows;
+        for(var i = 0, td; i < rows.length; i++){
+            td = document.createElement("td");
+            td.appendChild(document.createTextNode(i + 1));
+            rows[i].insertBefore(td, rows[i].firstChild);
+        }
+    </script>
+
+  </div><p></p>
+  <hr>
+
+  <!-- Page content below Payment History for Account Renewal and Upgrade -->
+  <div class="w3-container">
+
+    <p></p>
+    <!-- Header -->
+    <header class="w3-container" style="padding-top:15px; text-align:center;">
+      <h2 style="font-family: Raleway; color: #514e0d;"><b><i class="fa fa-amazon"></i> Membership Details</b></h2>
+    </header>
+    <p></p>
+    <br>
+
+    <!-- Page Section Content -->
+    <div class="row justify-content-md-center">
+      <div class="col">
+        <div class="form-group">
+          <label for="inputCity"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-trophy"></i> Member Plan: </span></label>
+          <input type="text" class="form-control border-secondary" name="inputCity" id="inputCity" value="{{user.userPlan}}" disabled>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="inputState"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-calendar-check-o"></i> Plan Validity: </span></label>
+          <input type="text" class="form-control border-secondary" name="inputState" id="inputState" value="30 Days" disabled>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="inputCountry"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-calendar-times-o"></i> Plan Expiration Date: </span></label>
+          <input type="text" class="form-control border-secondary" name="inputCountry" id="inputCountry" value="{{user.account_expiry_date}}" disabled>
+        </div>
+      </div>
+    </div><br>
+    <p></p>
+
+    <div class="form-group row">
+      <div class="col-md-12 text-center">
+        {% if (current_user.account_status=="New" or current_user.account_status=="Disabled") and current_user.pay_difference==0 %}
+        <form action="/amz_charge" method="POST">
+          <!-- FULL Payment in Indian Paise -->
+          <script
+              src="https://checkout.razorpay.com/v1/checkout.js"
+              data-key= "rzp_test_vpVJvJoRbJJq5o"
+              data-amount= "{{ current_user.razor_amount }}"
+              data-buttontext="Pay ₹{{ current_user.payable_amount }}"
+              data-name="SellerHub"
+              data-description="{{ current_user.userPlan }} Plan"
+              data-image= "https://i.imgur.com/aobfk6c.png"
+              data-prefill.email="{{ current_user.email }}"
+              data-theme.color="#7c4831"
+          ></script>
+          <input type="hidden" value="Hidden Element" name="hidden">
+        </form>
+        {% elif (current_user.account_status=="New" or current_user.account_status=="Disabled") and current_user.pay_difference!=0 %}
+        <form action="/amz_charge" method="POST">
+          <!-- FULL Payment in Indian Paise -->
+          <script
+              src="https://checkout.razorpay.com/v1/checkout.js"
+              data-key= "rzp_test_vpVJvJoRbJJq5o"
+              data-amount= "{{ current_user.razor_difference }}"
+              data-buttontext="Pay ₹{{ current_user.pay_difference }}"
+              data-name="SellerHub"
+              data-description="{{ current_user.userPlan }} Plan"
+              data-image= "https://i.imgur.com/aobfk6c.png"
+              data-prefill.email="{{ current_user.email }}"
+              data-theme.color="#7c4831"
+          ></script>
+          <input type="hidden" value="Hidden Element" name="hidden">
+        </form>
+        {% else %}
+        <button type="button" class="btn btn-primary" disabled>Disabled Button</button>
+        {% endif %}
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}

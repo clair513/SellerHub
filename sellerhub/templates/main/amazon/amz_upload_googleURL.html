@@ -1,0 +1,137 @@
+{% extends "base/amz_file_upload.html" %}
+{% block content %}
+<style type="text/css"> body{ background: url("../static/background/pablo.jpg") !important; background-size: cover !important; background-repeat: no-repeat !important; background-position: center !important; height: 100% !important;}</style>
+<style type="text/css"> html{ height: 100% !important; font-size: 1rem;}</style>
+<style>
+  @include media-breakpoint-up(sm) {html {font-size: 1.2rem;}}
+  @include media-breakpoint-up(md) {html {font-size: 1.4rem;}}
+  @include media-breakpoint-up(lg) {html {font-size: 1.6rem;}}
+</style>
+<style>
+  .close-icon {cursor: pointer;}
+  .custom-file-label {overflow: hidden;}
+</style>
+
+
+<!-- Page Content -->
+<div class="card border-dark" style="background-color: #cce6ff; color: #7c4831; margin-left:30px; margin-right:30px; margin-top:20px;">
+
+  <div class="card-header text-white bg-info">
+    <span class="pull-right clickable close-icon" data-effect="fadeOut" title="Close"><i class="material-icons">close</i></span>
+    <blockquote class="blockquote text-center"> <p class="mb-0"><u style="font-family: Arial;"> Manual Upload Preview: </u></p> </blockquote>
+  </div>
+
+  <div class="card-body">
+    <ul class="list-style">
+
+      <li><em><strong style="color:#4885ed;">G</strong><strong style="color:#db3236;">o</strong><strong style="color:#f4c20d;">o</strong><strong style="color:#4885ed;">g</strong><strong style="color:#3cba54;">l</strong><strong style="color:#db3236;">e</strong><strong> Drive URL</strong> Upload</em> option is pretty similar to <em><strong style="color:#4dc247;">Manual Upload</strong></em> option. In this process as well, Seller needs to download their transaction data reports from <mark style="background-color: #ffff80;"><a href="https://sellercentral.amazon.in/" class="aSC" target="_blank"><u>Amazon Seller Central</u></a></mark> as explained in <strong style="color:#4dc247;">Manual Upload</strong> process. To access our detailed step-by-step guidebook on fetching reports from  Seller Central, please click on <mark style="background-color: #ffff80;"><a href="https://medium.com/@sunindudata/generating-and-downloading-order-reports-from-amazon-seller-central-36a6a5c9a648" class="orderR" target="_blank"><u>Generating Orders Report</u></a></mark>, <mark style="background-color: #ffff80;"><a href="https://medium.com/@sunindudata/generating-and-downloading-returns-report-from-amazon-seller-central-e0d54d32a95d" class="returnR" target="_blank"><u>Generating Returns Report</u></a></mark> or <mark style="background-color: #ffff80;"><a href="https://medium.com/@sunindudata/generating-and-downloading-payments-report-from-amazon-seller-central-c7567e162a9b" class="paymentR" target="_blank"><u>Generating Payments Report</u></a></mark>, as per requirement.</li><br>
+
+      <li>Only difference is instead of manually uploading transaction report files on to our website, Seller can save those reports on their personal/official <a href="https://www.google.com/drive/" class="gDrive" target="_blank"><u><strong style="color:#4885ed;">G</strong><strong style="color:#db3236;">o</strong><strong style="color:#f4c20d;">o</strong><strong style="color:#4885ed;">g</strong><strong style="color:#3cba54;">l</strong><strong style="color:#db3236;">e</strong><strong> Drive</strong></u></a>, and provide us with a publicly shareable URL/link to each file. Each shared file link should have a <mark style="background-color: #ffff80;">View</mark> permission attached (by default, shared files are <em>Viewable</em> unless modified) to it. Our system shall read data from those files and generate reports based on them.</li><br>
+
+      <li>Uploading files to Google Drive & sharing it's URL is extremely simple, but we understand that it might get little confusing for the first time. Hence we provide a detailed step-by-step guidebook to smoothen this process. Please click on <mark style="background-color: #ffff80;"><a href="https://medium.com/@sunindudata/how-to-upload-save-a-file-on-google-drive-and-then-share-its-link-with-others-e0dcce497eea" class="gDriveLink" target="_blank"><u>How to upload a file on <strong style="color:#4885ed;">G</strong><strong style="color:#db3236;">o</strong><strong style="color:#f4c20d;">o</strong><strong style="color:#4885ed;">g</strong><strong style="color:#3cba54;">l</strong><strong style="color:#db3236;">e</strong><strong> Drive</strong> and get shareable Link</u></a></mark> for reference.</li>
+
+    </ul>
+  </div>
+</div>
+
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:30px;margin-top:30px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:15px; text-align:center;">
+    <h2 style="font-family: Raleway; color: #514e0d;"><b><i class="fa fa-google-plus-official fa-fw" style="color:#dd4b39;"></i> Google Drive URL Upload</b></h2>
+  </header>
+  <hr>
+
+
+  <!-- User Profile Details -->
+  <div class="container">
+
+    <!-- Flashing Messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong> Important: </strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+
+    <form action="" method="POST">
+      {{ form.hidden_tag() }}
+
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <div class="form-group">
+            <label for="orders_amz_url"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold; font-size:13px;"><i class="fa fa-cart-arrow-down"></i> Orders File Link: </span></label>
+            <input type="text" class="form-control border-dark" name="orders_amz_url" id="orders_amz_url" placeholder="Example: https://drive.google.com/open?id=.....">
+          </div>
+        </div>
+        {% for error in form.orders_amz_url.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+        <div class="col">
+          <div class="form-group">
+            <label for="returns_amz_url"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold; font-size:13px;"><i class="fa fa-thumbs-o-down"></i> Returns File Link: </span></label>
+            <input type="text" class="form-control border-dark" name="returns_amz_url" id="returns_amz_url" placeholder="Example: https://drive.google.com/open?id=.....">
+          </div>
+        </div>
+        {% for error in form.returns_amz_url.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <div class="form-group">
+            <label for="payments_amz_url"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold; font-size:13px;"><i class="fa fa-usd"></i> Payments File Link: </span></label>
+            <input type="text" class="form-control border-dark" name="payments_amz_url" id="payments_amz_url" placeholder="Example: https://drive.google.com/open?id=.....">
+          </div>
+        </div>
+        {% for error in form.payments_amz_url.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+        <div class="col">
+          <div class="form-group">
+            <label for="payments1_amz_url"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold; font-size:13px;"><i class="fa fa-usd"></i> [OPTIONAL] Additional Payments File Link: </span></label>
+            <input type="text" class="form-control border-dark" name="payments1_amz_url" id="payments1_amz_url" placeholder="Example: https://drive.google.com/open?id=.....">
+          </div>
+        </div>
+      </div><br>
+
+      <div class="form-group row">
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-link"></i> Upload Links</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+<script>
+  $("input[type=file]").change(function () {
+  var fieldVal = $(this).val();
+
+  // Change the node's value by removing the fake path (Chrome)
+  fieldVal = fieldVal.replace("C:\\fakepath\\", "");
+
+  if (fieldVal != undefined || fieldVal != "") {
+  $(this).next(".custom-file-label").attr('data-content', fieldVal);
+  $(this).next(".custom-file-label").text(fieldVal);
+  }
+
+  });
+</script>
+
+
+{% endblock %}

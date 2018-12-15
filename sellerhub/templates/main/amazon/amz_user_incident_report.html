@@ -1,0 +1,204 @@
+{% extends "base/amz_base.html" %}
+{% block content %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+<style type="text/css"> body{ background: url("../static/background/riverbed.jpg") !important; background-size: cover !important; background-repeat: no-repeat !important; background-position: center !important; height: 100% !important;}</style>
+<style type="text/css"> html{ height: 100% !important;}</style>
+
+
+<!-- !PAGE CONTENT! -->
+
+<!-- Support Ticket Table Display -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class=flashes>
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong> Great! </strong> {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:15px; text-align:center;">
+    <h2 style="font-family: Raleway; color: #514e0d;"><b><i class="fa fa-medkit"></i> Incident Reports</b></h2>
+  </header>
+  <hr>
+
+
+  <!-- User Support Ticket Table Details -->
+  <div class="w3-container">
+
+    <table class="w3-table w3-bordered w3-striped w3-border test w3-hoverable w3-centered w3-hover-lime">
+      <tbody>
+        <tr class="w3-red">
+          <th>Ticket No.</th>
+          <th>Category</th>
+          <th>Issue</th>
+          <th>Issue Description</th>
+          <th>Reported On</th>
+          <th>Status</th>
+        </tr>
+      </tbody>
+      <tbody style="font-family: Helvetica; color: #514e0d; padding-right:15px;">
+        {% for row in support %}
+        <tr>
+          <td>{{row["ticket_id"]}}</td>
+          <td>{{row["issueCategory"]}}</td>
+          <td>{{row["issueType"]}}</td>
+          <td>{{row["issueDescription"]}}</td>
+          <td>{{moment(row["reported_on"]).format("LLL")}}</td>
+          <td>{{row["ticket_status"]}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <script>
+        var tables = document.getElementsByTagName('table');
+        var table = tables[tables.length - 1];
+        var rows = table.rows;
+        for(var i = 0, td; i < rows.length; i++){
+            td = document.createElement('td');
+            td.appendChild(document.createTextNode(i + 1));
+            rows[i].insertBefore(td, rows[i].firstChild);
+        }
+    </script>
+
+  </div>
+
+  <div class="jumbotron" style="background:inherit;">
+
+    <script type="text/javascript">
+      // Array of possible Issues in the same order as they appear in the Category selection list:
+      var issueCategory = new Array(4)
+      issueCategory["empty"] = ["Select an Issue"];
+      issueCategory["General"] = ["Request for Demo", "Need to know more about membership plans", "Request a copy of T&C", "Request for Business Alliance", "Legal-Copyright Issue", "Legal-Regulatory Compliance", "Merger/Acquisition", "Other"];
+      issueCategory["Login and Payments"] = ["Unable to register", "Not received a Verification link", "Verification link expired", "Unable to login", "Unable to select a plan", "Payment Issue", "Overcharged for membership", "Unknown charges levied",
+        "Other"
+      ];
+      issueCategory["My Account"] = ["Incorrect Membership plan displayed", "Unable to upload data", "Unable to download data", "Data discrepancy", "Unable to upgrade", "Offers not getting applied", "Unable to cancel membership", "Other"];
+      issueCategory["Careers"] = ["Careers section Inaccessible", "Unable to enter required details", "Unable to upload file", "Unacceptable file size", "Specific Job ID inaccessible", "Other"];
+
+      /* 'issueChange()' is called from the onchange event of a 'issueCategory' select element.
+       * Parameter 'categoryObj' - Refers to the 'Category' object that fired this on change event.
+       */
+      function issueChange(issueCategoryObj) {
+        // Get Index of the selected Category option:
+        var idx = issueCategoryObj.selectedIndex;
+        // Get Value of the selected Category option:
+        var which = issueCategoryObj.options[idx].value;
+        // Using selected Option value to retrieve the list of items from issueLists array:
+        iList = issueCategory[which];
+        // Fetching Issue select element via its known id:
+        var iSelect = document.getElementById("issueType");
+        // Remove the current options from the Issue tab:
+        var len = iSelect.options.length;
+        while (iSelect.options.length > 0) {
+          iSelect.remove(0);
+        }
+        var newOption;
+        // Populate new options in Issue tab as per 'Category' selected:
+        for (var i = 0; i < iList.length; i++) {
+          newOption = document.createElement("option");
+          newOption.value = iList[i]; // Assuming 'option' string and 'value' are the same.
+          newOption.text = iList[i];
+          // Adding the new options to Issue list:
+          try {
+            iSelect.add(newOption); //This will fail in DOM browsers, but required for IE.
+          } catch (e) {
+            iSelect.appendChild(newOption);
+          }
+        }
+      }
+    </script>
+
+
+    <form action="" method="POST">
+      {{ form.hidden_tag() }}
+
+      <h4 style="font-family:verdana; color: #514e0d; text-align:center;"><b>Something troubling you? Let us look into it! <i class="fa fa-arrow-circle-down"></i></b></h4>
+      <br>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="email" "font-weight-bold">
+              <h5 style="font-family:verdana; color: #514e0d"><i class="fa fa-envelope"></i> Email Address: </h5>
+            </label>
+            <input type="email" class="form-control border-secondary" id="email" name="email" id="email" value="{{current_user.email}}" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="issueCategory">
+              <h5 style="font-family:verdana; color: #514e0d;"><i class="fa fa-cogs w3-spin"></i> Select Category:</h5>
+            </label>
+            <select class="form-control border-secondary" name="issueCategory" id="issueCategory" onchange="issueChange(this);">
+              <option value="empty">Select a Category</option>
+              <option value="General">General</option>
+              <option value="Login and Payments">Login and Payments</option>
+              <option value="My Account">My Account</option>
+              <option value="Careers">Careers</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label for="issueType">
+              <h5 style="font-family:verdana; color: #514e0d"><i class="fa fa-cogs w3-spin"></i> Issue Type:</h5>
+            </label>
+            <select class="form-control border-secondary" name="issueType" id="issueType">
+              <option value="0">Select an Issue Type</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="issueDescription">
+              <h5 style="font-family:verdana; color: #514e0d;"><i class="fa fa-pencil-square"></i> Issue Description: </h5>
+            </label>
+            <textarea class="form-control border-secondary" name="issueDescription" id="issueDescription" aria-describedby="issueDescription_help" rows="3">
+              </textarea>
+            <small id="issueDescription_help" class="form-text text-muted"><i style="font-family:verdana; color: #ff5900;">Please do not submit personally identifying information, or sensitive financial information like credit card numbers, through
+                this form.</small>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="form-group row">
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn btn-danger btn-lg float-right"><i class="fa fa-pencil-square-o"></i> Report</button>
+        </div>
+      </div>
+
+
+    </form>
+
+  </div>
+
+</div><br>
+<p></p>
+
+
+<div class="container">
+
+</div>
+
+
+{% endblock %}

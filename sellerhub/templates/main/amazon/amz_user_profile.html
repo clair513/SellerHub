@@ -1,0 +1,156 @@
+{% extends "base/amz_base.html" %}
+{% block content %}
+<style type="text/css"> body{ background: url("../static/background/riverbed.jpg") !important; background-size: cover !important; background-repeat: no-repeat !important; background-position: center !important; height: 100% !important;}</style>
+<style type="text/css"> html{ height: 100% !important;}</style>
+
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:15px; text-align:center;">
+    <h2 style="font-family: Raleway; color: #514e0d;"><b><i class="fa fa-id-badge"></i> Member Information</b></h2>
+    {% if user.last_seen %}<span class="badge badge-success"><i class="fa fa-eye"></i> Last Seen: {{moment(user.last_seen).format("LLL")}}</span>{% endif %}
+  </header><hr>
+
+
+  <!-- User Profile Details -->
+  <div class="container">
+
+    <!-- Flashing Messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong> Important: </strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+
+    <form action="" method="POST">
+      {{ form.hidden_tag() }}
+
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <div class="form-group">
+            <label for="email"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-envelope"></i> Email Address: </span></label>
+            <input type="email" class="form-control border-secondary" name="email" id="email" value="{{user.email}}" disabled>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="username"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-user"></i> Username: </span></label>
+            <input type="text" class="form-control border-secondary" name="username" id="username" value="{{user.username}}" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <div class="form-group">
+            <label for="first_name"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-user-secret"></i> First Name: </span></label>
+            <input type="text" class="form-control border-secondary" name="first_name" id="first_name" value="{{user.first_name}}">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="last_name"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-user-secret"></i> Last Name: </span></label>
+            <input type="text" class="form-control border-secondary" name="last_name" id="last_name" value="{{user.last_name}}">
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <div class="form-group">
+            <label for="social_id"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-id-badge"></i> Member ID: </span></label>
+            <input type="text" class="form-control border-secondary" name="social_id" id="social_id" value="{{user.social_id}}" disabled>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="userPlan"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-amazon"></i> Member Plan: </span></label>
+            <input type="text" class="form-control border-secondary" name="userPlan" id="userPlan" value="{{user.userPlan}}" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <div class="form-group">
+            <label for="userAddress"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-address-card"></i> Postal Address: </span></label>
+            <input type="text" class="form-control border-secondary" name="userAddress" id="userAddress" value="{{user.userAddress}}">
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <div class="form-group">
+            <label for="userCity"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-building-o"></i> Residing City: </span></label>
+            <input type="text" class="form-control border-secondary" name="userCity" id="userCity" value="{{user.userCity}}">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="userState"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-building-o"></i> State: </span></label>
+            <input type="text" class="form-control border-secondary" name="userState" id="userState" value="{{user.userState}}">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="userCountry"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-building-o"></i> Country: </span></label>
+            <input type="text" class="form-control border-secondary" name="userCountry" id="userCountry" value="{{user.userCountry}}">
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <div class="form-group">
+            <label for="company_name"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-industry"></i> Company Name: </span></label>
+            <input type="text" class="form-control border-secondary" name="company_name" id="company_name" value="{{user.company_name}}">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="company_url"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-info-circle"></i> Company URL: </span></label>
+            <input type="text" class="form-control border-secondary" name="company_url" id="company_url" value="{{user.company_url}}">
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <div class="form-group">
+            <label for="facebook_url"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-facebook-square"></i> Facebook URL: </span></label>
+            <input type="text" class="form-control border-secondary" name="facebook_url" id="facebook_url" value="{{user.facebook_url}}">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="linkedin_url"><span class="badge badge-warning" style="font-family: Verdana; font-weight: bold;"><i class="fa fa-linkedin-square"></i> LinkedIn URL: </span></label>
+            <input type="text" class="form-control border-secondary" name="linkedin_url" id="linkedin_url" value="{{user.linkedin_url}}">
+          </div>
+        </div>
+      </div><br>
+
+      <div class="form-group row">
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-check-square-o"></i> Update Profile</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}

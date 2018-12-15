@@ -1,0 +1,14 @@
+{% extends "base/home_base.html" %}
+{% block content %}
+
+
+<div class="jumbotron JumbotronFormImg1">
+  <blockquote class="blockquote text-center">
+    <img src="https://i.imgur.com/aobfk6c.png" class="rounded mx-auto d-block" alt="Image seems unavailable!"><br>
+    <h1 class="display-4" style="color: #e8e800;">An unexpected error has occurred. Sorry for the inconvenience!</h1><br>
+    <footer class="blockquote-footer" style="color: #e8e800;">The administrator has been notified.</footer>
+    <footer class="blockquote-footer"><a class="btn btn-warning" href="{{url_for("landing_page")}}" role="button"><i class="material-icons w3-large">home</i> Back to Home</a></footer>
+  </blockquote>
+</div>
+
+{% endblock %}

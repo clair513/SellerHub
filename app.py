@@ -1,5 +1,5 @@
 """
-This is our primary application script for production.
+This is our primary application script in Development.
 """
 
 # Importing required external libraries:
@@ -405,8 +405,8 @@ def amz_upload_manual(username):
     return render_template("main/amazon/amz_upload_manual.html", user=user, form=form)
 
 
-"""
-# [FAILED] AMAZON Dashboard 'FILE UPLOAD - Google Drive URL' section [Though Links getting added to 'Users' table]:
+
+#AMAZON Dashboard 'FILE UPLOAD - Google Drive URL' section [Though Links getting added to 'Users' table]:
 @app.route("/amz_upload_googleURL/<username>", methods=["GET", "POST"])
 @login_required
 def amz_upload_googleURL(username):
@@ -443,13 +443,13 @@ def amz_upload_googleURL(username):
     return render_template("main/amazon/amz_upload_googleURL.html", form=form, user=user)
 
 
-# [NOT ATTEMPTED] AMAZON Dashboard 'FILE UPLOAD - AMZ MWS' section:
+# AMAZON Dashboard 'FILE UPLOAD - AMZ MWS' section:
 @app.route("/amz_upload_amzmws/<username>", methods=["GET", "POST"])
 @login_required
 def amz_upload_amzmws(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template("main/amazon/amz_upload_amzmws.html", user=user)
-"""
+
 
 
 # AMAZON Dashboard 'Overview' section:
